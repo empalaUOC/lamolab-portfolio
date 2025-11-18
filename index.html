@@ -5,13 +5,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>LAMOLAB | Portfolio Estratégico</title>
     <style>
-        /* --- 1. VARIABLES DE MARCA (PEC 2) --- */
+        /* --- 1. VARIABLES DE MARCA --- */
         :root {
-            --bg-color: #EADCCB;      /* Beige Hueso */
-            --text-color: #4A3F35;    /* Marrón Café */
-            --accent-color: #15038C;  /* Azul Klein */
-            --highlight: #D5A021;     /* Mostaza */
-            --white-off: #F2F2E4;     /* Blanco Roto */
+            --bg-color: #EADCCB;
+            --text-color: #4A3F35;
+            --accent-color: #15038C;
+            --highlight: #D5A021;
+            --white-off: #F2F2E4;
         }
 
         html { scroll-behavior: smooth; }
@@ -20,21 +20,23 @@
         body {
             background-color: var(--bg-color);
             color: var(--text-color);
-            font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; 
+            font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
             line-height: 1.3;
             -webkit-font-smoothing: antialiased;
+            overflow-x: hidden; /* Evita scroll lateral indeseado */
         }
 
         a { text-decoration: none; color: inherit; transition: all 0.3s ease; }
 
-        /* --- LAYOUT --- */
+        /* --- LAYOUT GENERAL --- */
         .page-frame {
             border-left: 1px solid var(--text-color);
             border-right: 1px solid var(--text-color);
-            max-width: 1200px; 
+            max-width: 1200px;
             margin: 0 auto;
             background-color: var(--bg-color);
             min-height: 100vh;
+            position: relative;
         }
 
         /* --- HEADER --- */
@@ -43,7 +45,7 @@
             background-color: var(--bg-color);
             border-bottom: 1px solid var(--text-color);
             padding: 25px 40px;
-            display: flex; justify-content: space-between; align-items: flex-end;
+            display: flex; justify-content: space-between; align-items: center;
             z-index: 1000;
         }
         .brand { font-weight: 900; font-size: 1.5rem; line-height: 1; text-transform: uppercase; }
@@ -53,6 +55,7 @@
         nav a {
             font-size: 0.75rem; text-transform: uppercase; font-weight: 700; letter-spacing: 1px;
             border: 1px solid var(--text-color); padding: 10px 20px; border-radius: 50px;
+            white-space: nowrap; /* Evita que el texto se rompa */
         }
         nav a:hover { background-color: var(--accent-color); color: #fff; border-color: var(--accent-color); }
 
@@ -62,8 +65,10 @@
             min-height: 85vh; display: flex; flex-direction: column; justify-content: center;
         }
         h1 {
-            font-size: clamp(4rem, 9vw, 9rem); font-weight: 900; line-height: 0.85;
-            text-transform: uppercase; letter-spacing: -3px; margin-bottom: 40px; margin-left: -5px;
+            /* CLAMP hace la magia: la letra escala entre 3rem y 9rem según la pantalla */
+            font-size: clamp(3rem, 10vw, 9rem); 
+            font-weight: 900; line-height: 0.9;
+            text-transform: uppercase; letter-spacing: -0.03em; margin-bottom: 40px; margin-left: -2px;
         }
         .outline { color: transparent; -webkit-text-stroke: 2px var(--text-color); }
         .hero-copy {
@@ -71,17 +76,15 @@
             margin-left: auto; border-left: 3px solid var(--accent-color); padding-left: 20px;
         }
 
-        /* --- PROYECTOS (LINKS A PDF) --- */
+        /* --- PROYECTOS --- */
         #work { border-bottom: 1px solid var(--text-color); }
         
-        /* El enlace ahora es el contenedor del proyecto */
-        .project-link {
-            display: block; /* Hace que todo el bloque sea clicable */
-            text-decoration: none;
-        }
+        .project-link { display: block; text-decoration: none; }
 
         .project-item {
-            display: grid; grid-template-columns: 0.5fr 3fr 1fr;
+            display: grid; 
+            /* Layout de escritorio por defecto */
+            grid-template-columns: 0.5fr 3fr 1fr;
             padding: 60px 40px;
             border-bottom: 1px solid rgba(74, 63, 53, 0.3);
             align-items: center; transition: background 0.4s ease;
@@ -93,49 +96,92 @@
         
         .p-num { font-family: monospace; opacity: 0.6; }
         .p-title {
-            font-size: clamp(2rem, 5vw, 5rem); font-weight: 900; text-transform: uppercase;
-            line-height: 0.9; letter-spacing: -2px; transition: all 0.3s ease;
+            font-size: clamp(1.8rem, 6vw, 5rem); 
+            font-weight: 900; text-transform: uppercase;
+            line-height: 0.9; letter-spacing: -0.02em; transition: all 0.3s ease;
         }
         .p-cat {
             text-align: right; font-size: 0.8rem; font-weight: 700; text-transform: uppercase;
             border: 1px solid var(--text-color); padding: 5px 10px; display: inline-block; justify-self: end;
         }
 
-        /* --- ABOUT (CON FOTO) --- */
+        /* --- ABOUT --- */
         #about {
-            display: grid; grid-template-columns: 1fr 1fr; min-height: 80vh;
+            display: grid; 
+            grid-template-columns: 1fr 1fr; /* Dos columnas en escritorio */
+            min-height: 80vh;
             border-bottom: 1px solid var(--text-color);
         }
         .about-visual {
             border-right: 1px solid var(--text-color);
-            padding: 0; /* Quitamos padding para que la foto ocupe todo o se ajuste */
+            padding: 0; 
             display: flex; align-items: center; justify-content: center;
             background-color: rgba(74, 63, 53, 0.05);
-            overflow: hidden;
-            position: relative;
+            overflow: hidden; position: relative; min-height: 300px;
         }
-        
-        /* Estilo para tu foto.png */
         .profile-pic {
-            width: 100%;
-            height: 100%;
-            object-fit: cover; /* Esto hace que la foto llene el espacio sin deformarse */
-            filter: grayscale(100%); /* Opcional: la pone en blanco y negro para que sea más 'editorial' */
-            transition: filter 0.5s;
+            width: 100%; height: 100%; object-fit: cover;
+            filter: grayscale(100%); transition: filter 0.5s;
         }
-        .profile-pic:hover { filter: grayscale(0%); } /* Color al pasar el ratón */
+        .profile-pic:hover { filter: grayscale(0%); }
 
         .about-content { padding: 80px 60px; display: flex; flex-direction: column; justify-content: center; }
-        .about-content h2 { font-size: 2.5rem; line-height: 1; margin-bottom: 30px; text-transform: uppercase; }
+        .about-content h2 { font-size: clamp(2rem, 4vw, 3rem); line-height: 1; margin-bottom: 30px; text-transform: uppercase; }
+        
         .btn-big {
-            display: inline-block; margin-top: 30px; font-size: 1.2rem; font-weight: 900;
+            display: inline-block; margin-top: 30px; font-size: 1.1rem; font-weight: 900;
             text-transform: uppercase; padding: 20px 40px; border: 2px solid var(--text-color);
-            cursor: pointer;
+            cursor: pointer; width: fit-content;
         }
         .btn-big:hover { background-color: var(--accent-color); border-color: var(--accent-color); color: #fff; }
 
         /* Footer */
         footer { padding: 30px 40px; display: flex; justify-content: space-between; font-size: 0.8rem; font-family: monospace; text-transform: uppercase; }
+
+
+        /* =========================================
+           MEDIA QUERIES (Aquí ocurre la magia móvil)
+           ========================================= */
+        @media (max-width: 768px) {
+            /* Ajustes generales */
+            .page-frame { border: none; } /* Quita bordes laterales en móvil para ganar espacio */
+            
+            /* Header Móvil */
+            header { padding: 20px; flex-direction: column; gap: 20px; align-items: flex-start; }
+            nav { width: 100%; overflow-x: auto; padding-bottom: 5px; } /* Scroll horizontal si no caben */
+            nav ul { gap: 10px; }
+
+            /* Hero Móvil */
+            #home { padding: 80px 20px; min-height: 60vh; }
+            .hero-copy { margin-left: 0; padding-left: 15px; max-width: 100%; font-size: 1rem;}
+
+            /* Proyectos Móvil */
+            .project-item {
+                grid-template-columns: 1fr; /* Una sola columna (apilado) */
+                gap: 15px;
+                padding: 40px 20px;
+                text-align: left;
+            }
+            .p-num { display: none; } /* Ocultamos el número en móvil para limpiar */
+            .p-cat { justify-self: start; font-size: 0.7rem; } /* Categoría alineada a la izquierda */
+
+            /* About Móvil */
+            #about {
+                grid-template-columns: 1fr; /* Una sola columna */
+            }
+            .about-visual {
+                border-right: none;
+                border-bottom: 1px solid var(--text-color);
+                height: 400px; /* Altura fija para la foto en móvil */
+            }
+            .about-content {
+                padding: 40px 20px;
+            }
+
+            /* Footer Móvil */
+            footer { flex-direction: column; gap: 10px; padding: 20px; text-align: center; }
+        }
+
     </style>
 </head>
 <body>
@@ -162,7 +208,7 @@
 
     <section id="work">
         <div style="padding: 20px 40px; border-bottom: 1px solid var(--text-color); font-family: monospace; font-size: 0.8rem;">
-            [ CASOS DE ESTUDIO · CLIC PARA VER PDF ]
+            [ CASOS DE ESTUDIO · CLIC PARA VER ]
         </div>
 
         <a href="naturalezamuerta.pdf" target="_blank" class="project-link">
