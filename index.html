@@ -1,0 +1,340 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LAMOLAB | Portfolio Estratégico</title>
+    <style>
+        /* --- 1. VARIABLES DE MARCA (PEC 2) --- */
+        :root {
+            /* Paleta extraída del PDF PEC2 */
+            --bg-color: #EADCCB;      /* Beige Hueso  */
+            --text-color: #4A3F35;    /* Marrón Café (Principal)  */
+            --accent-color: #15038C;  /* Azul Klein (Interacción)  */
+            --highlight: #D5A021;     /* Mostaza (Detalles)  */
+            --white-off: #F2F2E4;     /* Blanco Roto  */
+        }
+
+        /* --- 2. COMPORTAMIENTO GENERAL --- */
+        html {
+            scroll-behavior: smooth; /* Desplazamiento suave entre secciones */
+        }
+
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            /* Tipografía Helvética (PEC 2) [cite: 229] */
+            font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; 
+            line-height: 1.3;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        a { text-decoration: none; color: inherit; transition: all 0.3s ease; }
+
+        /* --- 3. LAYOUT EDITORIAL (Estructura con bordes visibles) --- */
+        .page-frame {
+            border-left: 1px solid var(--text-color);
+            border-right: 1px solid var(--text-color);
+            max-width: 1200px; /* Ancho solicitado en entregables */
+            margin: 0 auto;
+            background-color: var(--bg-color);
+            min-height: 100vh;
+        }
+
+        /* --- 4. HEADER STICKY --- */
+        header {
+            position: sticky;
+            top: 0;
+            background-color: var(--bg-color);
+            border-bottom: 1px solid var(--text-color);
+            padding: 25px 40px;
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-end;
+            z-index: 1000;
+        }
+
+        .brand {
+            font-weight: 900;
+            font-size: 1.5rem;
+            letter-spacing: -1px;
+            line-height: 1;
+            text-transform: uppercase;
+        }
+        
+        .brand span {
+            display: block;
+            font-size: 0.7rem;
+            font-weight: 400;
+            font-family: monospace;
+            margin-top: 5px;
+            color: var(--text-color);
+        }
+
+        /* Menú de Navegación */
+        nav ul { display: flex; gap: 15px; list-style: none; }
+        
+        nav a {
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            font-weight: 700;
+            letter-spacing: 1px;
+            border: 1px solid var(--text-color);
+            padding: 10px 20px;
+            border-radius: 50px; /* Estilo pastilla */
+        }
+
+        /* EFECTO HOVER MENÚ: Fondo Azul, Texto Blanco */
+        nav a:hover {
+            background-color: var(--accent-color);
+            color: #fff;
+            border-color: var(--accent-color);
+        }
+
+        /* --- 5. HERO SECTION (Tipografía Gigante) --- */
+        #home {
+            padding: 120px 40px;
+            border-bottom: 1px solid var(--text-color);
+            min-height: 85vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        h1 {
+            font-size: clamp(4rem, 9vw, 9rem); /* Responsive gigante */
+            font-weight: 900;
+            line-height: 0.85;
+            text-transform: uppercase;
+            letter-spacing: -3px;
+            margin-bottom: 40px;
+            margin-left: -5px;
+        }
+
+        /* Palabra hueca (Outline) para estilo editorial */
+        .outline {
+            color: transparent;
+            -webkit-text-stroke: 2px var(--text-color);
+        }
+
+        .hero-copy {
+            max-width: 500px;
+            font-size: 1.2rem;
+            line-height: 1.4;
+            margin-left: auto; /* Alineado derecha */
+            border-left: 3px solid var(--accent-color);
+            padding-left: 20px;
+        }
+
+        /* --- 6. SECCIÓN PROYECTOS (Lista Interactiva) --- */
+        #work {
+            border-bottom: 1px solid var(--text-color);
+        }
+
+        .project-item {
+            display: grid;
+            grid-template-columns: 0.5fr 3fr 1fr;
+            padding: 60px 40px;
+            border-bottom: 1px solid rgba(74, 63, 53, 0.3);
+            align-items: center;
+            cursor: pointer;
+            transition: background 0.4s ease;
+        }
+
+        /* Quitar borde al último */
+        .project-item:last-child { border-bottom: none; }
+
+        /* EFECTO HOVER PROYECTOS: Cambia fondo y color de texto */
+        .project-item:hover {
+            background-color: var(--white-off);
+        }
+        .project-item:hover .p-title {
+            color: var(--accent-color); /* Título se vuelve Azul Klein */
+            transform: translateX(10px); /* Pequeño desplazamiento */
+        }
+
+        .p-num { font-family: monospace; opacity: 0.6; }
+        
+        .p-title {
+            font-size: clamp(2rem, 5vw, 5rem);
+            font-weight: 900;
+            text-transform: uppercase;
+            line-height: 0.9;
+            letter-spacing: -2px;
+            transition: all 0.3s ease;
+        }
+
+        .p-cat {
+            text-align: right;
+            font-size: 0.8rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            border: 1px solid var(--text-color);
+            padding: 5px 10px;
+            display: inline-block;
+            justify-self: end;
+        }
+
+        /* --- 7. SECCIÓN ABOUT (Manifiesto) --- */
+        #about {
+            display: grid;
+            grid-template-columns: 1fr 1fr; /* Pantalla dividida */
+            min-height: 80vh;
+            border-bottom: 1px solid var(--text-color);
+        }
+
+        .about-visual {
+            border-right: 1px solid var(--text-color);
+            padding: 40px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            background-color: rgba(74, 63, 53, 0.05); /* Marrón muy suave */
+        }
+
+        .big-logo {
+            font-size: 15rem;
+            font-weight: 900;
+            color: var(--bg-color); /* "L" en negativo */
+            -webkit-text-stroke: 2px var(--text-color); /* Borde marrón */
+            line-height: 0.8;
+            opacity: 0.5;
+        }
+
+        .about-content {
+            padding: 80px 60px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .about-content h2 {
+            font-size: 2.5rem;
+            line-height: 1;
+            margin-bottom: 30px;
+            text-transform: uppercase;
+        }
+
+        .about-content p {
+            font-size: 1.1rem;
+            margin-bottom: 20px;
+        }
+
+        /* BOTÓN GRANDE DE CONTACTO */
+        .btn-big {
+            display: inline-block;
+            margin-top: 30px;
+            font-size: 1.2rem;
+            font-weight: 900;
+            text-transform: uppercase;
+            padding: 20px 40px;
+            border: 2px solid var(--text-color);
+            background: transparent;
+            cursor: pointer;
+        }
+
+        /* HOVER BOTÓN GRANDE: Relleno Azul */
+        .btn-big:hover {
+            background-color: var(--accent-color);
+            border-color: var(--accent-color);
+            color: #fff;
+        }
+
+        /* --- 8. FOOTER --- */
+        footer {
+            padding: 30px 40px;
+            display: flex;
+            justify-content: space-between;
+            font-size: 0.8rem;
+            font-family: monospace;
+            text-transform: uppercase;
+        }
+
+    </style>
+</head>
+<body>
+
+<div class="page-frame">
+
+    <header>
+        <a href="#home" class="brand">
+            LAMOLAB
+            <span>Strategy & Design</span>
+        </a>
+        <nav>
+            <ul>
+                <li><a href="#work">Proyectos</a></li>
+                <li><a href="#about">Estudio</a></li>
+                <li><a href="mailto:hola@lamolab.com">Contacto</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <section id="home">
+        <h1>
+            Diseño<br>
+            <span class="outline">Método</span><br>
+            Propósito
+        </h1>
+        <div class="hero-copy">
+            <p>
+                El pensamiento supera a la orquesta. Identidad visual para marcas que buscan valor real, no solo estética vacía.
+            </p>
+        </div>
+    </section>
+
+    <section id="work">
+        <div style="padding: 20px 40px; border-bottom: 1px solid var(--text-color); font-family: monospace; font-size: 0.8rem;">
+            [ CASOS DE ESTUDIO SELECCIONADOS ]
+        </div>
+
+        <div class="project-item">
+            <div class="p-num">01 /</div>
+            <div class="p-title">Naturaleza<br>Muerta</div>
+            <div class="p-cat">Dirección de Arte</div>
+        </div>
+
+        <div class="project-item">
+            <div class="p-num">02 /</div>
+            <div class="p-title">Los Puentes<br>de Zaragoza</div>
+            <div class="p-cat">Editorial</div>
+        </div>
+
+        <div class="project-item">
+            <div class="p-num">03 /</div>
+            <div class="p-title">Change Your<br>Approach</div>
+            <div class="p-cat">Campaña / Activismo</div>
+        </div>
+    </section>
+
+    <section id="about">
+        <div class="about-visual">
+            <div>
+                <strong>Emilio Padilla</strong><br>
+                Diseñador Estratégico<br>
+                Zaragoza, ES
+            </div>
+            <div class="big-logo">LL</div> </div>
+        
+        <div class="about-content">
+            <h2>Del Control de Calidad al <span style="color: var(--highlight);">Diseño Consciente</span>.</h2>
+            
+            <p><strong>Lamolab</strong> nace de una convicción: el diseño no es decoración, es estrategia. Tras años liderando departamentos de calidad, traslado esa metodología rigurosa al universo creativo.</p>
+            
+            <p>Me distancio del modelo de "diseñador orquesta". Cada proyecto se aborda desde la investigación, rechazando la precariedad a favor de identidades duraderas y honestas.</p>
+
+            <a href="mailto:hola@lamolab.com" class="btn-big">Solicitar Presupuesto →</a>
+        </div>
+    </section>
+
+    <footer>
+        <div>© 2025 Lamolab</div>
+        <div>System: Online</div>
+    </footer>
+
+</div>
+
+</body>
+</html>
