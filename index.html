@@ -44,18 +44,16 @@
             pointer-events: none;
         }
 
-        /* --- LAYOUT (CORREGIDO: ANCHO COMPLETO 100%) --- */
+        /* --- LAYOUT GLOBAL (CORRECCIÓN: 100% ANCHO REAL) --- */
         .page-frame {
-            width: 100%; /* Ocupa todo el ancho */
-            max-width: none; /* Eliminado el límite de 1440px */
+            width: 100%; 
+            max-width: none; /* ELIMINADO EL LÍMITE DE 1440PX */
             margin: 0;
             background-color: var(--bg-color);
             position: relative;
             display: flex;
             flex-direction: column;
-            /* Bordes laterales eliminados para efecto pantalla completa */
-            border-left: none;
-            border-right: none;
+            border: none; /* Eliminados bordes laterales */
         }
 
         /* --- HEADER --- */
@@ -71,32 +69,12 @@
         }
         
         .brand { 
-            display: flex; 
-            align-items: center; 
-            gap: 15px; 
-            font-weight: 900; 
-            font-size: 1.5rem; 
-            line-height: 1; 
-            text-transform: uppercase; 
+            display: flex; align-items: center; gap: 15px; 
+            font-weight: 900; font-size: 1.5rem; line-height: 1; text-transform: uppercase; 
         }
-        
-        .brand img {
-            height: 50px; 
-            width: auto;
-        }
-
-        .brand-text {
-            display: flex;
-            flex-direction: column;
-        }
-
-        .brand span { 
-            display: block; 
-            font-size: 0.7rem; 
-            font-weight: 400; 
-            font-family: monospace; 
-            margin-top: 5px; 
-        }
+        .brand img { height: 50px; width: auto; }
+        .brand-text { display: flex; flex-direction: column; }
+        .brand span { display: block; font-size: 0.7rem; font-weight: 400; font-family: monospace; margin-top: 5px; }
         
         nav ul { display: flex; gap: 15px; list-style: none; }
         nav a {
@@ -105,16 +83,22 @@
         }
         nav a:hover, nav a.active-nav { background-color: var(--accent-color); color: #fff; border-color: var(--accent-color); }
 
-        /* --- HERO --- */
+        /* --- HERO (CORRECCIÓN: TIPOGRAFÍA GIGANTE) --- */
         #home {
-            padding: 100px 40px; border-bottom: 1px solid var(--text-color);
-            min-height: 100vh; display: flex; flex-direction: column; justify-content: center;
+            padding: 40px; 
+            border-bottom: 1px solid var(--text-color);
+            min-height: 100vh; 
+            display: flex; flex-direction: column; justify-content: center;
+            width: 100%;
         }
         h1 {
-            font-size: clamp(4rem, 13vw, 14rem); /* Tipografía gigante restaurada */
-            font-weight: 900; line-height: 0.85;
-            text-transform: uppercase; letter-spacing: -3px; margin-bottom: 40px; margin-left: -5px;
+            /* VALORES MUY ALTOS PARA LLENAR PANTALLA COMPLETA */
+            font-size: clamp(4rem, 14vw, 16rem); 
+            font-weight: 900; line-height: 0.8;
+            text-transform: uppercase; letter-spacing: -0.04em; 
+            margin-bottom: 40px; margin-left: -5px;
             word-break: break-word;
+            width: 100%;
         }
         .outline { color: transparent; -webkit-text-stroke: 2px var(--text-color); }
         .hero-copy {
@@ -129,6 +113,7 @@
             min-height: 100vh; 
             display: flex; flex-direction: column;
             scroll-margin-top: var(--header-height);
+            width: 100%;
         }
         
         .portfolio-filter-bar {
@@ -147,21 +132,25 @@
         .sub-sectors { display: none; gap: 20px; margin-left: 40px; font-size: 0.8rem; opacity: 0.7; flex-wrap: wrap; }
         .sub-sectors.show { display: flex; }
 
-        /* --- GRID (ANCHO COMPLETO) --- */
+        /* --- GRID (CORRECCIÓN: ANCHO COMPLETO) --- */
         .projects-grid {
-            display: grid; width: 100%; flex-grow: 1; transition: all 0.3s ease;
+            display: grid; 
+            width: 100%; 
+            flex-grow: 1; 
+            transition: all 0.3s ease;
             cursor: grab;
         }
         .projects-grid:active { cursor: grabbing; }
 
-        /* Escritorio: 3 columnas que ocupan el 100% del ancho */
+        /* ESCRITORIO: 3 COLUMNAS QUE OCUPAN EL 100% DEL ANCHO */
         .projects-grid:not(.filtered) { grid-template-columns: 1fr 1fr 1fr; }
-        /* Escritorio: 1 columna al filtrar */
+        
+        /* FILTRADO: 1 COLUMNA GIGANTE */
         .projects-grid.filtered { grid-template-columns: 1fr; }
 
         .project-card {
             position: relative; overflow: hidden;
-            /* Altura: Pantalla completa menos la cabecera */
+            /* Altura ajustada a pantalla completa menos cabecera */
             height: calc(100vh - var(--header-height)); 
             border-right: 1px solid var(--text-color);
             border-bottom: none;
@@ -179,13 +168,12 @@
             transition: opacity 0.3s;
         }
         
-        /* Colores Fondos Tarjetas */
         .bg-p1 { background-color: #F2F2E4; color: var(--accent-color); }
         .bg-p2 { background-color: var(--accent-color); color: var(--white-off); }
         .bg-p3 { background-color: var(--highlight); color: var(--text-color); }
 
         .card-title {
-            font-size: clamp(2rem, 4vw, 5rem);
+            font-size: clamp(3rem, 6vw, 6rem); /* Títulos grandes */
             font-weight: 900; text-transform: uppercase; line-height: 0.9; letter-spacing: -1px;
         }
         .card-cat { margin-top: 20px; font-family: monospace; font-size: 0.9rem; text-transform: uppercase; letter-spacing: 1px;}
@@ -193,7 +181,7 @@
         .card-face-image {
             position: absolute; top: 0; left: 0; width: 100%; height: 100%;
             object-fit: cover; opacity: 0; pointer-events: none; transition: opacity 0.4s ease;
-            object-position: top center; /* Cabecera visible */
+            object-position: top center; /* VER CABECERA FOTO */
         }
         
         .project-card.show-image .card-face-color { opacity: 0; }
@@ -204,6 +192,7 @@
         #about {
             display: grid; grid-template-columns: 1fr 1fr; min-height: 100vh;
             border-bottom: 1px solid var(--text-color);
+            width: 100%;
         }
         .about-visual {
             border-right: 1px solid var(--text-color);
@@ -215,13 +204,13 @@
         .about-content { padding: 80px 60px; display: flex; flex-direction: column; justify-content: center; }
         
         .about-content h2 { 
-            font-size: clamp(2rem, 4.5vw, 3.5rem); 
+            font-size: clamp(3rem, 6vw, 5rem); 
             line-height: 1; margin-bottom: 30px; 
             text-transform: uppercase; letter-spacing: -1px;
         }
-        .about-text p { font-size: 1.1rem; line-height: 1.6; margin-bottom: 20px; }
+        .about-text p { font-size: 1.2rem; line-height: 1.6; margin-bottom: 20px; }
         .btn-big {
-            display: inline-block; margin-top: 30px; font-size: 1.1rem; font-weight: 900;
+            display: inline-block; margin-top: 30px; font-size: 1.2rem; font-weight: 900;
             text-transform: uppercase; padding: 20px 40px; border: 2px solid var(--text-color);
         }
 
@@ -231,6 +220,7 @@
             padding: 80px 40px 40px 40px;
             display: flex; flex-direction: column; justify-content: space-between;
             min-height: 80vh; position: relative; overflow: hidden; id: "contact";
+            width: 100%;
         }
 
         .footer-top {
@@ -240,18 +230,18 @@
 
         .footer-nav-big { display: flex; flex-direction: column; gap: 10px; }
         .footer-nav-big a {
-            font-size: clamp(2rem, 4vw, 3.5rem); font-weight: 700; line-height: 1.1;
+            font-size: clamp(2.5rem, 5vw, 4rem); font-weight: 700; line-height: 1.1;
             text-transform: uppercase; transition: opacity 0.3s;
         }
         .footer-nav-big a:hover { opacity: 0.6; transform: translateX(10px); }
 
         .footer-quote {
-            max-width: 350px; text-align: right; font-size: 1.1rem; line-height: 1.5; opacity: 0.8;
+            max-width: 400px; text-align: right; font-size: 1.3rem; line-height: 1.5; opacity: 0.8;
             border-right: 2px solid var(--bg-color); padding-right: 20px;
         }
 
         .footer-brand-big {
-            font-size: clamp(3rem, 13vw, 14rem); 
+            font-size: clamp(4rem, 18vw, 25rem); /* GIGANTE */
             font-weight: 900; text-transform: uppercase; line-height: 0.8; letter-spacing: -0.04em;
             text-align: center; width: 100%; margin: 20px 0; white-space: nowrap;
         }
@@ -259,7 +249,7 @@
         .footer-bottom {
             display: flex; justify-content: space-between;
             border-top: 1px solid rgba(234, 220, 200, 0.3); padding-top: 20px;
-            font-size: 0.9rem; font-family: monospace; text-transform: uppercase;
+            font-size: 1rem; font-family: monospace; text-transform: uppercase;
             flex-wrap: wrap; gap: 20px;
         }
         .footer-socials { display: flex; gap: 20px; }
@@ -297,13 +287,11 @@
         }
         .modal-hero { height: 80vh; width: 100%; position: relative; }
         .modal-hero-img { width: 100%; height: 100%; object-fit: cover; }
-        
         .modal-content { max-width: 1000px; margin: 0 auto; padding: 100px 40px; position: relative; }
-        
         .project-description { font-size: 1.5rem; line-height: 1.6; margin-bottom: 60px; transform: translateY(50px); opacity: 0; transition: all 1s; }
         .project-description.visible { transform: translateY(0); opacity: 1; }
         
-        /* GALERÍA MODAL RESTAURADA A VERTICAL (1 COLUMNA) */
+        /* GALERÍA MODAL RESTAURADA A VERTICAL (1 COLUMNA) - COMO ANTES */
         .project-gallery { 
             display: grid; 
             grid-template-columns: 1fr; /* Una imagen debajo de otra */
@@ -317,7 +305,6 @@
            RESPONSIVE (MÓVIL / TABLET)
            ========================================= */
         @media (max-width: 768px) {
-            .page-frame { width: 100%; }
             
             header { padding: 20px; flex-direction: column; gap: 20px; align-items: flex-start; height: auto; }
             nav { width: 100%; overflow-x: auto; padding-bottom: 5px; }
@@ -434,7 +421,7 @@
                         <div class="card-title">ZAHA HADID<br>LEGADO</div>
                         <div class="card-cat">Diseño Editorial</div>
                     </div>
-                    <!-- IMAGEN PORTADA ACTUALIZADA -->
+                    <!-- IMAGEN PORTADA -->
                     <img src="zahaportada.jpg" class="card-face-image" alt="Zaha Hadid Project">
                 </div>
 
@@ -444,7 +431,7 @@
                         <div class="card-title">PUENTES DE<br>ZARAGOZA</div>
                         <div class="card-cat">Fotografía</div>
                     </div>
-                    <!-- IMAGEN PORTADA ACTUALIZADA -->
+                    <!-- IMAGEN PORTADA -->
                     <img src="puentesportada.jpg" class="card-face-image" alt="Puentes Project">
                 </div>
 
@@ -454,7 +441,7 @@
                         <div class="card-title">PROTEFAUNA<br>NEWSLETTER</div>
                         <div class="card-cat">Diseño Gráfico</div>
                     </div>
-                    <!-- IMAGEN PORTADA ACTUALIZADA -->
+                    <!-- IMAGEN PORTADA -->
                     <img src="protefaunaportada.jpg" class="card-face-image" alt="Protefauna Project">
                 </div>
             </div>
@@ -621,7 +608,7 @@
             document.addEventListener('mouseup', onMouseUp);
         }
 
-        // --- MODAL ---
+        // --- MODAL (CON DATOS REALES DE PDF) ---
         const projectData = {
             1: {
                 img: 'zahaportada.jpg', // Portada también en el modal
