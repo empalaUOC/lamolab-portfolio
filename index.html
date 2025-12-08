@@ -321,6 +321,45 @@ nav a,
         .project-description { font-size: 1.5rem; line-height: 1.6; margin-bottom: 60px; transform: translateY(50px); opacity: 0; transition: all 1s; }
         .project-description.visible { transform: translateY(0); opacity: 1; }
 
+/* === LIGHTBOX DE IMAGEN === */
+.image-lightbox {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.75);
+    display: none;                  /* se muestra al hacer clic */
+    align-items: center;
+    justify-content: center;
+    z-index: 11000;                 /* por encima del modal */
+}
+
+.image-lightbox-img {
+    max-width: 90vw;
+    max-height: 90vh;
+    object-fit: contain;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.7);
+    border-radius: 6px;
+    background: #111;
+}
+
+.image-lightbox-close {
+    position: fixed;
+    top: 24px;
+    right: 32px;
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    border: none;
+    background: var(--accent-color);
+    color: #fff;
+    font-size: 1.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    z-index: 11001;
+}
+
+
         /* CARRUSEL — que la primera imagen se vea entera */
 .project-gallery {
     display: flex;
@@ -451,6 +490,14 @@ nav a,
             <div class="project-gallery" id="modal-gallery"></div>
         </div>
     </div>
+
+    <!-- LIGHTBOX PARA ZOOM DE IMÁGENES DEL CARRUSEL -->
+    <div id="image-lightbox" class="image-lightbox" onclick="closeImageLightbox()">
+        <img id="lightbox-img" class="image-lightbox-img" src="" alt="Proyecto ampliado"
+             onclick="event.stopPropagation()">
+        <button class="image-lightbox-close" onclick="closeImageLightbox()">×</button>
+    </div>
+
 
     <!-- PÁGINA PRINCIPAL -->
     <div class="page-frame">
@@ -716,11 +763,16 @@ nav a,
             const galleryContainer = document.getElementById('modal-gallery');
             galleryContainer.innerHTML = ''; 
             data.gallery.forEach(src => {
-                const img = document.createElement('img');
-                img.src = src;
-                img.className = 'gallery-img';
-                galleryContainer.appendChild(img);
-            });
+    const img = document.createElement('img');
+    img.src = src;
+    img.className = 'gallery-img';
+
+    // Al hacer clic en una miniatura, abrimos el zoom
+    img.addEventListener('click', () => openImageLightbox(src));
+
+    galleryContainer.appendChild(img);
+});
+
             modal.style.display = 'block';
             document.body.style.overflow = 'hidden';
         }
@@ -730,6 +782,18 @@ nav a,
             document.body.style.overflow = 'auto';
             document.querySelector('.project-description').classList.remove('visible');
         }
+        function openImageLightbox(src) {
+            const lightbox = document.getElementById('image-lightbox');
+            const img = document.getElementById('lightbox-img');
+            img.src = src;
+            lightbox.style.display = 'flex';
+        }
+
+        function closeImageLightbox() {
+            const lightbox = document.getElementById('image-lightbox');
+            lightbox.style.display = 'none';
+        }
+
 
         document.getElementById('project-modal').addEventListener('scroll', function() {
             const desc = document.querySelector('.project-description');
