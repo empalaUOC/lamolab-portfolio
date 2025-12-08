@@ -306,40 +306,30 @@
         .project-description.visible { transform: translateY(0); opacity: 1; }
 
         /* CARRUSEL HORIZONTAL CON IMÁGENES PEGADAS */
-/* CARRUSEL HORIZONTAL CON IMÁGENES PEGADAS */
-.project-gallery {
-    position: relative;
-    width: 100vw;           
-    margin-top: 40px;
-    margin-left: 50%;
-    transform: translateX(-50%);
+        .project-gallery {
+            position: relative;
+            width: 100vw;           
+            margin-top: 40px;
+            margin-left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            overflow-x: auto;
+            scroll-snap-type: x mandatory;
+            padding: 0;
+        }
 
-    display: flex;
-    overflow-x: auto;
-    scroll-snap-type: x mandatory;
-    
-    padding: 0;             /* 🔥 Sin padding */
-}
+        .project-gallery::-webkit-scrollbar {
+            display: none;
+        }
 
-.project-gallery::-webkit-scrollbar {
-    display: none;
-}
-
-.gallery-img {
-    flex: 0 0 auto;         /* 🔥 Ajusta imagen a su tamaño natural, no fuerza 100vw */
-    height: 45vh;           /* Carrusel más estrecho */
-    
-    object-fit: contain;    /* Imagen completa, no recortada */
-    scroll-snap-align: start;
-
-    margin: 0;              /* 🔥 Sin margen entre imágenes */
-    display: block;
-}
-
-
-
-
-
+        .gallery-img {
+            flex: 0 0 auto;
+            height: 45vh;
+            object-fit: contain;
+            scroll-snap-align: start;
+            margin: 0;
+            display: block;
+        }
 
         /* === RESPONSIVE === */
         @media (max-width: 768px) {
@@ -353,7 +343,6 @@
             .portfolio-filter-bar { padding: 20px; flex-direction: column; align-items: flex-start; gap: 15px; }
             .sub-sectors { margin-left: 0; flex-direction: column; gap: 10px; }
 
-            /* En móvil: 1 columna, scroll normal */
             .projects-grid,
             .projects-grid:not(.filtered),
             .projects-grid.filtered {
@@ -441,6 +430,7 @@
         <section id="home">
             <h1>DEL CONTROL DE<br><span class="outline">CALIDAD AL</span><br>DISEÑO CONSCIENTE</h1>
             <div class="hero-copy">
+                <p><strong>Diseño estratégico para empresas que valoran la precisión, la eficiencia y el rigor técnico.</strong></p>
                 <p>Identidad visual para <strong>empresas industriales y técnicas</strong> que tienen un producto de primera calidad pero una imagen que no les hace justicia. Aplicamos metodología y rigor para que tu marca transmita la misma excelencia que tu producto.</p>
             </div>
         </section>
@@ -456,7 +446,12 @@
                     <span class="filter-btn" onclick="filterSpecific('foto')">Fotografía</span>
                     <span class="filter-btn" onclick="filterSpecific('grafico')">Diseño Gráfico</span>
                 </div>
-                <div>[ SELECCIÓN 2025 ]</div>
+                <div>
+                    [ SELECCIÓN 2025 ]
+                    <span style="font-weight:400; text-transform:none; font-size:0.8rem; opacity:0.7; margin-left:10px;">
+                        Selección transversal de proyectos anteriores a mi especialización en el sector industrial y técnico.
+                    </span>
+                </div>
             </div>
 
             <div class="projects-grid" id="projects-grid">
@@ -500,6 +495,7 @@
                     <p>Esta estética no es caprichosa. El uso del color <em>kraft</em>, la tipografía técnica y la maquetación estructurada referencian a los <strong>informes de ingeniería y el embalaje industrial</strong>. Es un diseño honesto, sin adornos, pensado para comunicar solidez y eficiencia.</p>
                 </div>
                 <a href="mailto:hola@lamolab.com" class="btn-big">Solicitar Auditoría Visual →</a>
+                <p style="margin-top:10px; font-size:0.9rem; opacity:0.8;">Respuesta en menos de 24 h. Sin compromiso.</p>
             </div>
         </section>
 
@@ -641,21 +637,24 @@
                 gallery: ['zaha1.jpg', 'zaha2.jpg', 'zaha3.jpg'],
                 text: `<h3>ZAHA HADID: LEGADO ARQUITECTÓNICO</h3>
                        <p><strong>El encargo era:</strong> Diseñar el interior de una publicación editorial centrada en la figura y obra de la arquitecta Zaha Hadid, respetando su legado visual fluido y orgánico.</p>
-                       <p><strong>La solución:</strong> Se ha trabajado con una retícula modular de 6x8 que proporciona flexibilidad y ritmo visual a la publicación. La elección tipográfica combina Playfair Display para los titulares (elegancia) con Roboto para los cuerpos de texto (legibilidad moderna). El diseño busca un equilibrio entre sofisticación y vanguardia, utilizando espacios negativos y una paleta cromática minimalista para ceder el protagonismo a las imágenes de arquitectura.</p>`
+                       <p><strong>La solución:</strong> Se ha trabajado con una retícula modular de 6x8 que proporciona flexibilidad y ritmo visual a la publicación. La elección tipográfica combina Playfair Display para los titulares (elegancia) con Roboto para los cuerpos de texto (legibilidad moderna). El diseño busca un equilibrio entre sofisticación y vanguardia, utilizando espacios negativos y una paleta cromática minimalista para ceder el protagonismo a las imágenes de arquitectura.</p>
+                       <p><strong>Resultado:</strong> una publicación clara y equilibrada que combina elegancia editorial con una estructura técnica sólida, potenciando el protagonismo visual de la arquitectura.</p>`
             },
             2: {
                 img: 'puentesportada.jpg',
                 gallery: ['puentes1.jpg', 'puentes2.jpg', 'puentes3.jpg'],
                 text: `<h3>LOS PUENTES DE ZARAGOZA</h3>
                        <p><strong>El encargo era:</strong> Crear un relato fotográfico que capturara la esencia de los puentes de Zaragoza, entendiéndolos no solo como infraestructuras, sino como símbolos de conexión histórica y evolución urbana.</p>
-                       <p><strong>La solución:</strong> El proyecto explora la luz cálida del atardecer para resaltar siluetas y generar contrastes dramáticos. Se documenta desde el histórico Puente de Piedra hasta el moderno Pabellón Puente y el Puente del Tercer Milenio. Técnicamente, se ha jugado con la ISO baja para evitar ruido y velocidades de obturación ajustadas para captar el detalle en condiciones de luz cambiante, potenciando la atmósfera mediante una edición cuidadosa.</p>`
+                       <p><strong>La solución:</strong> El proyecto explora la luz cálida del atardecer para resaltar siluetas y generar contrastes dramáticos. Se documenta desde el histórico Puente de Piedra hasta el moderno Pabellón Puente y el Puente del Tercer Milenio. Técnicamente, se ha jugado con la ISO baja para evitar ruido y velocidades de obturación ajustadas para captar el detalle en condiciones de luz cambiante, potenciando la atmósfera mediante una edición cuidadosa.</p>
+                       <p><strong>Resultado:</strong> una narrativa visual coherente y documental que resalta la identidad urbana a través de luz, estructura y contraste cromático.</p>`
             },
             3: {
                 img: 'protefaunaportada.jpg',
                 gallery: ['protefauna1.jpg', 'protefauna2.jpg', 'protefauna3.jpg'],
                 text: `<h3>PROTEFAUNA: NEWSLETTER & LANDING</h3>
                        <p><strong>El encargo era:</strong> Diseñar una Newsletter estacional y una Landing Page para la Asociación Protectora de Animales de Barcelona (Protefauna), con el objetivo de fomentar la adopción y el voluntariado.</p>
-                       <p><strong>La solución:</strong> Se ha desarrollado un sistema visual claro y empático basado en una retícula de 8 columnas. El diseño utiliza los colores corporativos (naranja y marrón) para transmitir calidez y urgencia. La tipografía Montserrat en titulares aporta modernidad, mientras que Roboto en textos asegura una lectura fácil. La estructura jerarquiza la información para guiar al usuario hacia las acciones clave: donar, adoptar o hacerse socio.</p>`
+                       <p><strong>La solución:</strong> Se ha desarrollado un sistema visual claro y empático basado en una retícula de 8 columnas. El diseño utiliza los colores corporativos (naranja y marrón) para transmitir calidez y urgencia. La tipografía Montserrat en titulares aporta modernidad, mientras que Roboto en textos asegura una lectura fácil. La estructura jerarquiza la información para guiar al usuario hacia las acciones clave: donar, adoptar o hacerse socio.</p>
+                       <p><strong>Resultado:</strong> un sistema visual coherente que mejora la jerarquía informativa y guía al usuario hacia acciones clave como adoptar, colaborar o hacerse socio.</p>`
             }
         };
 
