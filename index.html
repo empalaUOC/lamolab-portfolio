@@ -305,38 +305,45 @@
         .project-description { font-size: 1.5rem; line-height: 1.6; margin-bottom: 60px; transform: translateY(50px); opacity: 0; transition: all 1s; }
         .project-description.visible { transform: translateY(0); opacity: 1; }
 
-        /* GALERÍA MODAL: CARRUSEL HORIZONTAL FULL WIDTH */
-	.project-gallery {
-  	  position: relative;
- 	   width: 100vw;                    /* ocupa todo el ancho de la ventana */
- 	   margin-top: 40px;
- 	   margin-left: 50%;                /* truco para centrar el 100vw respecto al contenido */
- 	   transform: translateX(-50%);
+        /* GALERÍA MODAL: CARRUSEL HORIZONTAL FULL WIDTH CON IMÁGENES COMPLETAS */
+.project-gallery {
+    position: relative;
+    width: 100vw;
+    margin-top: 40px;
+    margin-left: 50%;
+    transform: translateX(-50%);
+
+    display: flex;
+    gap: 0;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+
+    background-color: #e8dfd3; /* beige suave, puedes cambiarlo */
+}
+
+.project-gallery::-webkit-scrollbar {
+    display: none;
+}
+
+.gallery-img {
+    flex: 0 0 100vw;        /* cada imagen una pantalla completa */
+    height: 45vh;           /* 🔥 MÁS ESTRECHO (puedes bajar a 40vh si quieres) */
     
- 	   display: flex;
- 	   gap: 0;
- 	   overflow-x: auto;                /* scroll horizontal */
- 	   scroll-snap-type: x mandatory;   /* scroll “por pantallas” */
-	}
+    object-fit: contain;    /* 🔥 SE VE COMPLETA SIN RECORTAR */
+    object-position: center;
 
-	.project-gallery::-webkit-scrollbar {
-  	  display: none;                   /* ocultar scrollbar para que se vea limpio */
-	}
+    scroll-snap-align: center;
+    display: block;
+    background: #e8dfd3;    /* fondo detrás de la imagen */
+}
 
-	.gallery-img {
- 	   flex: 0 0 100vw;                 /* cada imagen ocupa exactamente 1 ancho de ventana */
- 	   height: 80vh;                    /* alto grande tipo pantalla */
- 	   object-fit: cover;
-  	  scroll-snap-align: center;
-  	  display: block;
-	}
-
-	/* Ajuste en móvil: un poco menos de altura */
-	@media (max-width: 768px) {
+/* Ajuste móvil */
+@media (max-width: 768px) {
     .gallery-img {
- 	       height: 60vh;
- 	   }
-	}
+        height: 35vh;       /* más pequeño en móvil */
+    }
+}
+
 
 
         /* === RESPONSIVE === */
