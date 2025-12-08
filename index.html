@@ -305,20 +305,39 @@
         .project-description { font-size: 1.5rem; line-height: 1.6; margin-bottom: 60px; transform: translateY(50px); opacity: 0; transition: all 1s; }
         .project-description.visible { transform: translateY(0); opacity: 1; }
 
-        /* GALERÍA MODAL VERTICAL */
-        .project-gallery { 
-            display: flex;
-            flex-direction: column;
-            gap: 30px;
-            margin-top: 40px;
-        }
-        
-        .gallery-img { 
-            width: 100%; 
-            height: auto; 
-            display: block; 
-            object-fit: cover;
-        }
+        /* GALERÍA MODAL: CARRUSEL HORIZONTAL FULL WIDTH */
+	.project-gallery {
+  	  position: relative;
+ 	   width: 100vw;                    /* ocupa todo el ancho de la ventana */
+ 	   margin-top: 40px;
+ 	   margin-left: 50%;                /* truco para centrar el 100vw respecto al contenido */
+ 	   transform: translateX(-50%);
+    
+ 	   display: flex;
+ 	   gap: 0;
+ 	   overflow-x: auto;                /* scroll horizontal */
+ 	   scroll-snap-type: x mandatory;   /* scroll “por pantallas” */
+	}
+
+	.project-gallery::-webkit-scrollbar {
+  	  display: none;                   /* ocultar scrollbar para que se vea limpio */
+	}
+
+	.gallery-img {
+ 	   flex: 0 0 100vw;                 /* cada imagen ocupa exactamente 1 ancho de ventana */
+ 	   height: 80vh;                    /* alto grande tipo pantalla */
+ 	   object-fit: cover;
+  	  scroll-snap-align: center;
+  	  display: block;
+	}
+
+	/* Ajuste en móvil: un poco menos de altura */
+	@media (max-width: 768px) {
+    .gallery-img {
+ 	       height: 60vh;
+ 	   }
+	}
+
 
         /* === RESPONSIVE === */
         @media (max-width: 768px) {
