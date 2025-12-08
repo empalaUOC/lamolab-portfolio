@@ -308,32 +308,29 @@
         /* CARRUSEL HORIZONTAL CON IMÁGENES PEGADAS */
 .project-gallery {
     position: relative;
-    width: 100vw;           
+    width: calc(100vw - 8vw);   /* 💥 Carrusel más estrecho */
+    margin-left: 8vw;           /* 💥 Inicio con margen equivalente a ~4cm */
     margin-top: 40px;
-    margin-left: 50%;
-    transform: translateX(-50%);
 
     display: flex;
     overflow-x: auto;
     scroll-snap-type: x mandatory;
-    
-    padding: 0;             /* 🔥 Sin padding */
+    scroll-behavior: smooth;
+    gap: 0;                     /* Las imágenes van pegadas */
+    padding: 0;
 }
 
 .project-gallery::-webkit-scrollbar {
-    display: none;
+    display: none; /* Opcional: oculta la barra horizontal */
 }
 
 .gallery-img {
-    flex: 0 0 auto;         /* 🔥 Ajusta imagen a su tamaño natural, no fuerza 100vw */
-    height: 45vh;           /* Carrusel más estrecho */
-    
-    object-fit: contain;    /* Imagen completa, no recortada */
-    scroll-snap-align: start;
-
-    margin: 0;              /* 🔥 Sin margen entre imágenes */
-    display: block;
+    flex: 0 0 auto;
+    height: 45vh;               /* Más pequeño para no ocupar tanto */
+    object-fit: contain;        /* Se ve la imagen completa */
+    scroll-snap-align: center;  /* Centrado al parar el scroll */
 }
+
 
 
 
