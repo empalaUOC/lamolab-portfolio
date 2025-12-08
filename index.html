@@ -447,18 +447,28 @@ nav a,
 /* Versión apilada para móvil y tablet vertical:
    foto arriba, texto abajo */
 @media (max-width: 900px) {
+    /* cambiamos grid por flex en móvil */
     #about {
-        grid-template-columns: 1fr;        /* una sola columna */
+        display: flex;
+        flex-direction: column;   /* primero la foto, luego el texto */
+        min-height: auto;
     }
 
     .about-visual {
-        height: 360px;                     /* alto razonable para la foto */
+        width: 100%;
         border-right: none;
         border-bottom: 1px solid var(--text-color);
+        height: auto;
+    }
+
+    .profile-pic {
+        width: 100%;
+        height: auto;             /* que no se corte en móvil */
+        object-fit: cover;
     }
 
     .about-content {
-        padding: 40px 20px;                /* márgenes más contenidos en móvil */
+        padding: 40px 20px;       /* márgenes más pequeños en móvil */
     }
 }
 
