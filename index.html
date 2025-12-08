@@ -306,18 +306,19 @@
         .project-description.visible { transform: translateY(0); opacity: 1; }
 
         /* CARRUSEL HORIZONTAL CON IMÁGENES PEGADAS */
+/* CARRUSEL HORIZONTAL CON IMÁGENES PEGADAS */
 .project-gallery {
     position: relative;
-    width: calc(100vw - 2vw);   /* ahora solo restamos 2vw */
-    margin-left: 2vw;           /* margen pequeño (~1 cm real) */
+    width: 100vw;           
     margin-top: 40px;
+    margin-left: 50%;
+    transform: translateX(-50%);
 
     display: flex;
     overflow-x: auto;
     scroll-snap-type: x mandatory;
-    scroll-behavior: smooth;
-    gap: 0;
-    padding: 0;
+    
+    padding: 0;             /* 🔥 Sin padding */
 }
 
 .project-gallery::-webkit-scrollbar {
@@ -325,11 +326,17 @@
 }
 
 .gallery-img {
-    flex: 0 0 auto;
-    height: 45vh;
-    object-fit: contain;
-    scroll-snap-align: center;
+    flex: 0 0 auto;         /* 🔥 Ajusta imagen a su tamaño natural, no fuerza 100vw */
+    height: 45vh;           /* Carrusel más estrecho */
+    
+    object-fit: contain;    /* Imagen completa, no recortada */
+    scroll-snap-align: start;
+
+    margin: 0;              /* 🔥 Sin margen entre imágenes */
+    display: block;
 }
+
+
 
 
 
