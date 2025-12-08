@@ -444,16 +444,24 @@ nav a,
             .modal-content { padding: 60px 20px; }
             .project-description { font-size: 1.1rem; }
         }
-/* Versión apilada solo para móvil muy estrecho */
-@media (max-width: 600px) {
-    #about { grid-template-columns: 1fr; }
-    .about-visual { 
-        height: 400px; 
-        border-right: none; 
-        border-bottom: 1px solid var(--text-color); 
+/* Versión apilada para móvil y tablet vertical:
+   foto arriba, texto abajo */
+@media (max-width: 900px) {
+    #about {
+        grid-template-columns: 1fr;        /* una sola columna */
     }
-    .about-content { padding: 40px 20px; }
+
+    .about-visual {
+        height: 360px;                     /* alto razonable para la foto */
+        border-right: none;
+        border-bottom: 1px solid var(--text-color);
+    }
+
+    .about-content {
+        padding: 40px 20px;                /* márgenes más contenidos en móvil */
+    }
 }
+
 
 
     </style>
