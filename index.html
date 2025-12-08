@@ -405,16 +405,44 @@ nav a,
 }
 
 /* Ajustes responsive para móvil < 768px */
+/* Ajustes responsive para móvil < 768px */
 @media (max-width: 768px) {
-    header { padding: 20px; flex-direction: column; gap: 20px; align-items: flex-start; height: auto; }
-    nav { width: 100%; overflow-x: auto; padding-bottom: 5px; }
+    header {
+        padding: 20px;
+        flex-direction: column;
+        gap: 20px;
+        align-items: flex-start;
+        height: auto;
+    }
+
+    nav {
+        width: 100%;
+        overflow-x: auto;
+        padding-bottom: 5px;
+    }
+
     nav ul { gap: 10px; }
 
     #home { padding: 80px 20px; }
-    .hero-copy { margin-left: 0; padding-left: 15px; font-size: 1.1rem; border-left-width: 2px; }
+    .hero-copy {
+        margin-left: 0;
+        padding-left: 15px;
+        font-size: 1.1rem;
+        border-left-width: 2px;
+    }
 
-    .portfolio-filter-bar { padding: 20px; flex-direction: column; align-items: flex-start; gap: 15px; }
-    .sub-sectors { margin-left: 0; flex-direction: column; gap: 10px; }
+    .portfolio-filter-bar {
+        padding: 20px;
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 15px;
+    }
+
+    .sub-sectors {
+        margin-left: 0;
+        flex-direction: column;
+        gap: 10px;
+    }
 
     .projects-grid,
     .projects-grid:not(.filtered),
@@ -423,7 +451,32 @@ nav a,
         grid-template-columns: 1fr !important;
         cursor: default;
     }
+
+    /* 🔽 AQUÍ VIENE LO IMPORTANTE: ABOUT EN MÓVIL 🔽 */
+
+    #about {
+        display: block;          /* dejamos de usar grid */
+        min-height: auto;
+    }
+
+    .about-visual {
+        width: 100%;
+        border-right: none;
+        border-bottom: 1px solid var(--text-color);
+    }
+
+    .profile-pic {
+        display: block;
+        width: 100%;
+        height: auto;
+        object-fit: cover;
+    }
+
+    .about-content {
+        padding: 40px 20px;
+    }
 }
+
 
             
             .project-card { 
@@ -444,34 +497,6 @@ nav a,
             .modal-content { padding: 60px 20px; }
             .project-description { font-size: 1.1rem; }
         }
-/* Versión apilada para móvil y tablet vertical:
-   foto arriba, texto abajo */
-@media (max-width: 900px) {
-    /* cambiamos grid por flex en móvil */
-    #about {
-        display: flex;
-        flex-direction: column;   /* primero la foto, luego el texto */
-        min-height: auto;
-    }
-
-    .about-visual {
-        width: 100%;
-        border-right: none;
-        border-bottom: 1px solid var(--text-color);
-        height: auto;
-    }
-
-    .profile-pic {
-        width: 100%;
-        height: auto;             /* que no se corte en móvil */
-        object-fit: cover;
-    }
-
-    .about-content {
-        padding: 40px 20px;       /* márgenes más pequeños en móvil */
-    }
-}
-
 
 
     </style>
