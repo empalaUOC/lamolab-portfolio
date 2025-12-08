@@ -305,20 +305,19 @@
         .project-description { font-size: 1.5rem; line-height: 1.6; margin-bottom: 60px; transform: translateY(50px); opacity: 0; transition: all 1s; }
         .project-description.visible { transform: translateY(0); opacity: 1; }
 
-        /* GALERÍA MODAL: CARRUSEL HORIZONTAL FULL WIDTH CON IMÁGENES COMPLETAS */
+        /* CARRUSEL HORIZONTAL CON IMÁGENES PEGADAS */
 .project-gallery {
     position: relative;
-    width: 100vw;
+    width: 100vw;           
     margin-top: 40px;
     margin-left: 50%;
     transform: translateX(-50%);
 
     display: flex;
-    gap: 0;
     overflow-x: auto;
     scroll-snap-type: x mandatory;
-
-    background-color: #e8dfd3; /* beige suave, puedes cambiarlo */
+    
+    padding: 0;             /* 🔥 Sin padding */
 }
 
 .project-gallery::-webkit-scrollbar {
@@ -326,23 +325,16 @@
 }
 
 .gallery-img {
-    flex: 0 0 100vw;        /* cada imagen una pantalla completa */
-    height: 45vh;           /* 🔥 MÁS ESTRECHO (puedes bajar a 40vh si quieres) */
+    flex: 0 0 auto;         /* 🔥 Ajusta imagen a su tamaño natural, no fuerza 100vw */
+    height: 45vh;           /* Carrusel más estrecho */
     
-    object-fit: contain;    /* 🔥 SE VE COMPLETA SIN RECORTAR */
-    object-position: center;
+    object-fit: contain;    /* Imagen completa, no recortada */
+    scroll-snap-align: start;
 
-    scroll-snap-align: center;
+    margin: 0;              /* 🔥 Sin margen entre imágenes */
     display: block;
-    background: #e8dfd3;    /* fondo detrás de la imagen */
 }
 
-/* Ajuste móvil */
-@media (max-width: 768px) {
-    .gallery-img {
-        height: 35vh;       /* más pequeño en móvil */
-    }
-}
 
 
 
